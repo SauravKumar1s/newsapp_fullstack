@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; 
+
 
 interface OTPVerificationProps {
   email: string;
@@ -27,6 +29,10 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({
       .then((res) => {
         console.log("Response:", res.data);
         if (res.data.code === 200) {
+          toast.success("Password updated", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+          });
           navigate("/login");
         }
       })

@@ -44,7 +44,7 @@ const CategoryComponent = () => {
   };
 
   return (
-    <section className='category-wrapper'>
+    <section className='flex flex-wrap items-center justify-center'>
       {categoryTokens.map(({categoryName, color}) => (
         <ButtonComponent
           key={categoryName}

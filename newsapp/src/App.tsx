@@ -1,9 +1,8 @@
-import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import DetailPage from './components/pages/DetailPage/DetailPage';
 import HomeComponent from './components/pages/HomePage/Home';
 import Login from './components/pages/Login/Login';
-
 import NotFound from './components/pages/NotFound/notfound';
 import Signup from './components/pages/SignUp/Signup';
 import FavNews from './components/pages/fav/FavNews';
@@ -14,18 +13,13 @@ import ForgetPassword from './components/pages/Login/ForgetPassword';
 import OTPVerification from './components/pages/Login/OTPVerification';
 import NewPassword from './components/pages/Login/NewPassoword';
 
+
 function App() {
-  const notify = () => toast.success('Hello, world!');
+  const notify = () => toast.success('Hello, world!'); 
   return (
     <>
-      {/* <HomeComponent /> */}
       <DarkModeProvider>
-      <Router>
-      {/* <div>
-      
-      <button onClick={notify}>Show Toast</button>
-      <ToastContainer />
-    </div> */}
+        <Router>
         <Routes>
           <Route path='/' element={<HomeComponent />} />
           <Route path='/login' element={<Login />} />
@@ -37,7 +31,7 @@ function App() {
           <Route path='/detail/:category' element={<DetailPage />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
-      </Router>
+        </Router>
       </DarkModeProvider>
     </>
   );

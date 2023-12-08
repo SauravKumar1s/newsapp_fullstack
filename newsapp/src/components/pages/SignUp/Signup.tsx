@@ -54,8 +54,7 @@ const Signup = () => {
         })
         .then((res) => {
           toast.success("Signup successful!");
-          navigate('/');
-           // Redirect to homepage on successful signup
+          navigate('/', { state: { selectedTopics } });
         })
         .catch((err) => {
           toast.error("Signup failed. Please try again.");

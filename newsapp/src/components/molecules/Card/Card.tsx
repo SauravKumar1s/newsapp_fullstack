@@ -66,7 +66,7 @@ const Card: React.FC<CardProps> = ({
         <div>
           <ToastContainer />
         </div>
-        <div className="card-content">
+        <div className="">
           <div className="text-gray-500">{source}</div>
           <h1 className="text-2xl font-semibold text-blue-600">
             <a href={url} target="_blank" rel="noopener noreferrer">

@@ -1,5 +1,5 @@
 import {default as React, useContext, useEffect, useReducer} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate , useLocation} from 'react-router-dom';
 import {filterAndSliceArticles} from '../../../utils/filterAndSliceArticles/filterAndSliceArticles';
 import {timeElapsedSince} from '../../../utils/timeElapsed/timeElapsed';
 import CategoryHeader from '../../atoms/CategoryHeader/Header';
@@ -14,6 +14,8 @@ import { useDarkMode } from '../../organisms/context/DarkModeContext';
 const HomeComponent: React.FC = () => {
   const { isDarkMode } = useDarkMode();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { selectedTopics } = location.state || {};
   const {
     businessState,
     setBusinessState,
