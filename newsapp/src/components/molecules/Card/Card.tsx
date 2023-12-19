@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToWishList } from "../../../features/wishlist/wishSlice";
+import { addToWishList } from "../../../constants/wishlist/wishSlice";
+import { addToHistory } from "../../../constants/historylist/historySlice";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,6 +26,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const dispatch = useDispatch();
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [isInHistory, setIsInHistory] = useState(false);
 
   const handleAddToWishList = () => {
     // Check if the item is already in the wishlist
@@ -58,6 +60,24 @@ const Card: React.FC<CardProps> = ({
     setIsInWishlist(true);
   };
 
+  const handleAddToHistory = () => {
+
+    // Add the item to the history list
+    dispatch(
+      addToHistory({
+        id: "",
+        imageUrl,
+        title,
+        description,
+        lastUpdated,
+        url,
+        source,
+      })
+    );
+
+    setIsInHistory(true);
+  };
+
   const { isDarkMode } = useDarkMode();
 
   return (
@@ -68,13 +88,13 @@ const Card: React.FC<CardProps> = ({
         </div>
         <div className="">
           <div className="text-gray-500">{source}</div>
-          <h1 className="text-2xl font-semibold text-blue-600">
+          <h1 className="text-2xl font-semibold text-blue-600" onClick={handleAddToHistory}>
             <a href={url} target="_blank" rel="noopener noreferrer">
               {title}
             </a>
           </h1>
           {description && (
-            <p className="mt-2 text-gray-700">
+            <p className="mt-2 text-gray-700" onClick={handleAddToHistory}>
               {description}
               <a
                 href={url}
@@ -89,6 +109,7 @@ const Card: React.FC<CardProps> = ({
           <p className="cursor-pointer" onClick={handleAddToWishList}>
             {isInWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
           </p>
+
           <p className="mt-2 text-sm text-gray-400">{lastUpdated}</p>
         </div>
         <img src={imageUrl} alt={title} className="mt-4 w-full rounded-lg" />

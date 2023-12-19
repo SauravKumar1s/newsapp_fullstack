@@ -68,12 +68,6 @@ const HomeComponent: React.FC = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const API_KEY = '677afcb07c1a4acfbaf13f3c69420943';
-  const key0 = 'f7b752bd9b9643719d2c31079822f9d8'; // tan
-  const key1 = '6e256f9c5c604636a85c33f828af7b7e'; //dav
-  const key2 = '4cc2340375884cc5abde119594fbb772'; //aim
-  const key3 = 'be0cebd1f6e64786a22b1450f3d122a9';
-  const key4 = '2d55f494fe674381af5e990d5d995b6e';
-  const key5 = 'ac009e2e2d1b4cc3a6ec7087c51a73af';
   const fetchArticles = async (category: any) => {
     try {
       const response = await fetch(

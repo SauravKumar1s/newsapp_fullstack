@@ -38,8 +38,6 @@ export const wishlistsSlice = createSlice({
       }
     },
     
- 
-    
 
     removeWishlist: (state, action: PayloadAction<WishlistItem>) => {
       const updatedWishlists = state.wishlistsItems?.filter(

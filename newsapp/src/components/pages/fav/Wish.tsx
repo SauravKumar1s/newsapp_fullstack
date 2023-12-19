@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { removeWishlist } from "../../../features/wishlist/wishSlice";
-import { toast, ToastContainer } from "react-toastify"; // Import toast from react-toastify
+import { removeWishlist } from "../../../constants/wishlist/wishSlice";
+import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 import { useDarkMode } from "../../organisms/context/DarkModeContext";
 
@@ -33,7 +33,6 @@ const Wish: React.FC<WishProps> = ({ wishlist }) => {
     });
   };
   const { isDarkMode } = useDarkMode();
-
   return (
     <div className={isDarkMode ? "dark-mode" : "light-mode bg-white"}>
       <div className="flex flex-col items-center  rounded-lg shadow md:flex-row md:max-w-xl ">

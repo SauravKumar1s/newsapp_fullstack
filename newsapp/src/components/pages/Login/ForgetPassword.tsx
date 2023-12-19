@@ -20,7 +20,6 @@ const ForgetPassword: React.FC = () => {
         console.log("Response:", res.data);
         if (res.data.code === 200) {
             navigate('/otp-verification');
-            
         }
         setOtpSent(true);
       })

@@ -12,6 +12,7 @@ import { DarkModeProvider } from './components/organisms/context/DarkModeContext
 import ForgetPassword from './components/pages/Login/ForgetPassword';
 import OTPVerification from './components/pages/Login/OTPVerification';
 import NewPassword from './components/pages/Login/NewPassoword';
+import HistoryLists from './components/pages/fav/HistoryLists';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/fav' element={<FavNews />} />
+          <Route path='/history' element={<HistoryLists />} />
           <Route path='/forget-password' element={<ForgetPassword />} />
           <Route path='/otp-verification' element={<OTPVerification />} />
           <Route path='/new-password' element={<NewPassword />} />

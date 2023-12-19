@@ -88,12 +88,16 @@ const HeaderNavigationMenu: React.FC<HeaderProps> = ({ title }) => {
             <div className="text-white hover:text-blue-200">
               {localStorage.getItem('email')}
             </div>
+            
             <div className="text-white hover:text-blue-200 cursor-pointer" onClick={() => {
               localStorage.clear()
               navigate("login")
             }}>
               logout
             </div>
+            <Link to="/history" className="text-white hover:text-blue-200 ">
+              History
+            </Link>
             <Link to="/fav" className="text-white hover:text-blue-200 text-2xl">
               <AiFillHeart />
             </Link>
