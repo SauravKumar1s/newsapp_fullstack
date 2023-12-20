@@ -16,6 +16,7 @@ const HomeComponent: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { selectedTopics } = location.state || {};
+
   const {
     businessState,
     setBusinessState,
@@ -102,14 +103,22 @@ const HomeComponent: React.FC = () => {
     }
   };
 
+
   useEffect(() => {
-    fetchArticles('business');
-    fetchArticles('entertainment');
-    fetchArticles('health');
-    fetchArticles('science');
-    fetchArticles('sports');
-    fetchArticles('technology');
-  }, []);
+    if (selectedTopics && selectedTopics.length > 0) {
+      selectedTopics.forEach((topic: string) => {
+        fetchArticles(topic.toLowerCase());
+      });
+    } else {
+      // If no selected topics, fetch default articles
+      fetchArticles('business');
+      fetchArticles('entertainment');
+      fetchArticles('health');
+      fetchArticles('science');
+      fetchArticles('sports');
+      fetchArticles('technology');
+    }
+  }, [selectedTopics]);
 
   const {
     business,
@@ -134,7 +143,7 @@ const HomeComponent: React.FC = () => {
     <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
       {/* nav */}
       <HeaderNavigationMenu title={'React News App'} />
-      <CategoryComponent />
+      {/* <CategoryComponent /> */}
       
 
      

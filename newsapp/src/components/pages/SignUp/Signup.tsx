@@ -54,7 +54,7 @@ const Signup = () => {
         })
         .then((res) => {
           toast.success("Signup successful!");
-          navigate('/', { state: { selectedTopics } });
+          navigate('/', { state: { selectedTopics } }); // Pass selected topics to the home page
         })
         .catch((err) => {
           toast.error("Signup failed. Please try again.");
@@ -64,6 +64,28 @@ const Signup = () => {
       toast.error("Please fix the errors in the form.");
     }
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const validationErrors = validateForm();
+  //   if (Object.keys(validationErrors).length === 0) {
+  //     axios
+  //       .post("http://localhost:5000/signup", {
+  //         email: email,
+  //         password: password,
+  //         topics: selectedTopics,
+  //       })
+  //       .then((res) => {
+  //         toast.success("Signup successful!");
+  //         navigate('/', { state: { selectedTopics } }); // Pass selected topics to the home page
+  //       })
+  //       .catch((err) => {
+  //         toast.error("Signup failed. Please try again.");
+  //       });
+  //   } else {
+  //     setErrors(validationErrors);
+  //     toast.error("Please fix the errors in the form.");
+  //   }
+  // };
 
   const validateForm = () => {
     let errors = {};
