@@ -34,6 +34,8 @@ const Login = () => {
             // navigate("/",{state:{selectedTopics:}});
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("email", email);
+            localStorage.setItem("topics",res.data.topics );
+
           } else {
             toast.error("Invalid credentials. Please try again.");
           }

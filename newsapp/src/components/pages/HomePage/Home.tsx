@@ -1,22 +1,22 @@
-import {default as React, useContext, useEffect, useReducer} from 'react';
-import {useNavigate , useLocation} from 'react-router-dom';
-import {filterAndSliceArticles} from '../../../utils/filterAndSliceArticles/filterAndSliceArticles';
-import {timeElapsedSince} from '../../../utils/timeElapsed/timeElapsed';
-import CategoryHeader from '../../atoms/CategoryHeader/Header';
-import Loader from '../../atoms/Loader/Loader';
-import Card from '../../molecules/Card/Card';
-import CategoryComponent from '../../molecules/Category/Category';
-import HeaderNavigationMenu from '../../organisms/Navigation/HeaderNavigationMenu';
-import {NewsAppContext} from '../../organisms/context/NewsAppContext';
-import './Home.styles.css';
-import { useDarkMode } from '../../organisms/context/DarkModeContext';
+import { default as React, useContext, useEffect, useReducer } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { filterAndSliceArticles } from "../../../utils/filterAndSliceArticles/filterAndSliceArticles";
+import { timeElapsedSince } from "../../../utils/timeElapsed/timeElapsed";
+import CategoryHeader from "../../atoms/CategoryHeader/Header";
+import Loader from "../../atoms/Loader/Loader";
+import Card from "../../molecules/Card/Card";
+import CategoryComponent from "../../molecules/Category/Category";
+import HeaderNavigationMenu from "../../organisms/Navigation/HeaderNavigationMenu";
+import { NewsAppContext } from "../../organisms/context/NewsAppContext";
+import "./Home.styles.css";
+import { useDarkMode } from "../../organisms/context/DarkModeContext";
 
 const HomeComponent: React.FC = () => {
   const { isDarkMode } = useDarkMode();
   const navigate = useNavigate();
   const location = useLocation();
   const { selectedTopics } = location.state || {};
-
+  console.log("selected topi", selectedTopics);
   const {
     businessState,
     setBusinessState,
@@ -49,14 +49,14 @@ const HomeComponent: React.FC = () => {
 
   const reducer = (state: any, action: any) => {
     switch (action.type) {
-      case 'FETCH_SUCCESS':
+      case "FETCH_SUCCESS":
         return {
           ...state,
           [action.category]: action.articles,
           loading: false,
           error: null,
         };
-      case 'FETCH_ERROR':
+      case "FETCH_ERROR":
         return {
           ...state,
           loading: false,
@@ -68,7 +68,7 @@ const HomeComponent: React.FC = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const API_KEY = '677afcb07c1a4acfbaf13f3c69420943';
+  const API_KEY = "677afcb07c1a4acfbaf13f3c69420943";
   const fetchArticles = async (category: any) => {
     try {
       const response = await fetch(
@@ -76,33 +76,32 @@ const HomeComponent: React.FC = () => {
       );
       const data = await response.json();
       switch (category) {
-        case 'business':
+        case "business":
           setBusinessState(data.articles);
           break;
-        case 'entertainment':
+        case "entertainment":
           setEntertainmentState(data.articles);
           break;
-        case 'health':
+        case "health":
           setHealthState(data.articles);
           break;
-        case 'science':
+        case "science":
           setScienceState(data.articles);
           break;
-        case 'sports':
+        case "sports":
           setSportsState(data.articles);
           break;
-        case 'technology':
+        case "technology":
           setTechnologyState(data.articles);
           break;
         default:
           console.error(`Invalid category: ${category}`);
       }
-      dispatch({type: 'FETCH_SUCCESS', category, articles: data.articles});
+      dispatch({ type: "FETCH_SUCCESS", category, articles: data.articles });
     } catch (error) {
-      dispatch({type: 'FETCH_ERROR', error});
+      dispatch({ type: "FETCH_ERROR", error });
     }
   };
-
 
   useEffect(() => {
     if (selectedTopics && selectedTopics.length > 0) {
@@ -110,13 +109,23 @@ const HomeComponent: React.FC = () => {
         fetchArticles(topic.toLowerCase());
       });
     } else {
+      const topicsString = localStorage.getItem("topics");
+
+      if(topicsString == undefined) return navigate("/login")
+      const topic = topicsString?.split(",");
+      topic?.forEach((topic) => {
+        fetchArticles(topic.toLowerCase());
+      });
+
+
+      
       // If no selected topics, fetch default articles
-      fetchArticles('business');
-      fetchArticles('entertainment');
-      fetchArticles('health');
-      fetchArticles('science');
-      fetchArticles('sports');
-      fetchArticles('technology');
+      // fetchArticles('business');
+      // fetchArticles('entertainment');
+      // fetchArticles('health');
+      // fetchArticles('science');
+      // fetchArticles('sports');
+      // fetchArticles('technology');
     }
   }, [selectedTopics]);
 
@@ -135,178 +144,188 @@ const HomeComponent: React.FC = () => {
     return <div>Error: {error.message}</div>;
   }
   const categoryDetailPage = (val: any, data: any) => {
-    const category = {title: val, data: data};
-    navigate(`/detail/${val}`, {state: {category}});
+    const category = { title: val, data: data };
+    navigate(`/detail/${val}`, { state: { category } });
   };
   return (
     <>
-    <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
-      {/* nav */}
-      <HeaderNavigationMenu title={'React News App'} />
-      {/* <CategoryComponent /> */}
-      
+      <div className={isDarkMode ? "dark-mode" : "light-mode"}>
+        {/* nav */}
+        <HeaderNavigationMenu title={"React News App"} />
+        {/* <CategoryComponent /> */}
 
-     
-      <div className='grid grid-cols-3'>
-        {/* left */}
-        <div className=''>
-          <CategoryHeader
-            title={'Technology'}
-            onClick={() => categoryDetailPage('technology', technologyState)}
-          />
-          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+        {/* <div className="grid grid-cols-3"> */}
+        <div className=" flex gap-4 flex-wrap justify-between">
+          {/* left */}
+          {technologyState.length > 0 && (
+            <div style={{ flex: "0 0 30%" }}>
+              <CategoryHeader
+                title={"Technology"}
+                onClick={() =>
+                  categoryDetailPage("technology", technologyState)
+                }
+              />
+              {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
 
-          {loading ? (
-            <Loader />
-          ) : (
-            filterAndSliceArticles(technologyState, 3).map(
-              (article: any, index: number) => (
-                <Card
-                  key={index}
-                  source={article.source.name}
-                  url={article.url}
-                  imageUrl={article.urlToImage}
-                  title={article.title}
-                  lastUpdated={timeElapsedSince(article.publishedAt)}
-                />
-              )
-            )
+              {loading ? (
+                <Loader />
+              ) : (
+                filterAndSliceArticles(technologyState, 3).map(
+                  (article: any, index: number) => (
+                    <Card
+                      key={index}
+                      source={article.source.name}
+                      url={article.url}
+                      imageUrl={article.urlToImage}
+                      title={article.title}
+                      lastUpdated={timeElapsedSince(article.publishedAt)}
+                    />
+                  )
+                )
+              )}
+            </div>
+          )}
+          {/* center */}
+
+          {healthState.length > 0 && (
+            <div className="  overflow-hidden" style={{ flex: "0 0 30%" }}>
+              <CategoryHeader
+                title={"Health"}
+                onClick={() => categoryDetailPage("health", healthState)}
+              />
+              {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+              {loading ? (
+                <Loader />
+              ) : (
+                filterAndSliceArticles(healthState, 3).map(
+                  (article: any, index: number) => (
+                    <Card
+                      key={index}
+                      source={article.source.name}
+                      url={article.url}
+                      imageUrl={article.urlToImage}
+                      title={article.title}
+                      lastUpdated={timeElapsedSince(article.publishedAt)}
+                    />
+                  )
+                )
+              )}
+            </div>
+          )}
+          {/* right */}
+          {scienceState.length > 0 && (
+            <div style={{ flex: "0 0 30%" }}>
+              <CategoryHeader
+                title={"Science"}
+                onClick={() => categoryDetailPage("science", scienceState)}
+              />
+              {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+              {loading ? (
+                <Loader />
+              ) : (
+                filterAndSliceArticles(scienceState, 3).map(
+                  (article: any, index: number) => (
+                    <Card
+                      key={index}
+                      source={article.source.name}
+                      url={article.url}
+                      imageUrl={article.urlToImage}
+                      title={article.title}
+                      lastUpdated={timeElapsedSince(article.publishedAt)}
+                    />
+                  )
+                )
+              )}
+            </div>
+          )}
+          {/* left */}
+          {sportsState.length > 0 && (
+            <div style={{ flex: "0 0 30%" }}>
+              <CategoryHeader
+                title={"Sports"}
+                onClick={() => categoryDetailPage("sports", sportsState)}
+              />
+              {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+              {loading ? (
+                <Loader />
+              ) : (
+                filterAndSliceArticles(sportsState, 3).map(
+                  (article: any, index: number) => (
+                    <Card
+                      key={index}
+                      source={article.source.name}
+                      url={article.url}
+                      imageUrl={article.urlToImage}
+                      title={article.title}
+                      lastUpdated={timeElapsedSince(article.publishedAt)}
+                    />
+                  )
+                )
+              )}
+            </div>
+          )}
+
+          {/* center */}
+
+          {entertainmentState.length > 0 && (
+            <div style={{ flex: "0 0 30%" }}>
+              <CategoryHeader
+                title={"Entertainment"}
+                onClick={() =>
+                  categoryDetailPage("entertainment", entertainmentState)
+                }
+              />
+              {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+              {loading ? (
+                <Loader />
+              ) : (
+                filterAndSliceArticles(entertainmentState, 3).map(
+                  (article: any, index: number) => (
+                    <Card
+                      key={index}
+                      source={article.source.name}
+                      url={article.url}
+                      imageUrl={article.urlToImage}
+                      title={article.title}
+                      lastUpdated={timeElapsedSince(article.publishedAt)}
+                    />
+                  )
+                )
+              )}
+            </div>
+          )}
+          {/* right */}
+          {businessState.length && (
+            <div style={{ flex: "0 0 30%" }}>
+              <CategoryHeader
+                title={"Business"}
+                onClick={() => categoryDetailPage("business", businessState)}
+              />
+              {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+              {loading ? (
+                <Loader />
+              ) : (
+                filterAndSliceArticles(businessState, 3).map(
+                  (article: any, index: number) => (
+                    <Card
+                      key={index}
+                      source={article.source.name}
+                      url={article.url}
+                      imageUrl={article.urlToImage}
+                      title={article.title}
+                      lastUpdated={timeElapsedSince(article.publishedAt)}
+                    />
+                  )
+                )
+              )}
+            </div>
           )}
         </div>
-        {/* center */}
-
-        <div className=''>
-          <CategoryHeader
-            title={'Health'}
-            onClick={() => categoryDetailPage('health', healthState)}
-          />
-          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
-
-          {loading ? (
-            <Loader />
-          ) : (
-            filterAndSliceArticles(healthState, 3).map(
-              (article: any, index: number) => (
-                <Card
-                  key={index}
-                  source={article.source.name}
-                  url={article.url}
-                  imageUrl={article.urlToImage}
-                  title={article.title}
-                  lastUpdated={timeElapsedSince(article.publishedAt)}
-                />
-              )
-            )
-          )}
-        </div>
-        {/* right */}
-        <div className=''>
-          <CategoryHeader
-            title={'Science'}
-            onClick={() => categoryDetailPage('science', scienceState)}
-          />
-          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
-
-          {loading ? (
-            <Loader />
-          ) : (
-            filterAndSliceArticles(scienceState, 3).map(
-              (article: any, index: number) => (
-                <Card
-                  key={index}
-                  source={article.source.name}
-                  url={article.url}
-                  imageUrl={article.urlToImage}
-                  title={article.title}
-                  lastUpdated={timeElapsedSince(article.publishedAt)}
-                />
-              )
-            )
-          )}
-        </div>
-      </div>
-      <div className='grid grid-cols-3 gap-10'>
-        {/* left */}
-        <div className=''>
-          <CategoryHeader
-            title={'Sports'}
-            onClick={() => categoryDetailPage('sports', sportsState)}
-          />
-          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
-
-          {loading ? (
-            <Loader />
-          ) : (
-            filterAndSliceArticles(sportsState, 3).map(
-              (article: any, index: number) => (
-                <Card
-                  key={index}
-                  source={article.source.name}
-                  url={article.url}
-                  imageUrl={article.urlToImage}
-                  title={article.title}
-                  lastUpdated={timeElapsedSince(article.publishedAt)}
-                />
-              )
-            )
-          )}
-        </div>
-
-
-        {/* center */}
-
-        <div className=''>
-          <CategoryHeader
-            title={'Entertainment'}
-            onClick={() =>
-              categoryDetailPage('entertainment', entertainmentState)
-            }
-          />
-          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
-
-          {loading ? (
-            <Loader />
-          ) : (
-            filterAndSliceArticles(entertainmentState, 3).map(
-              (article: any, index: number) => (
-                <Card
-                  key={index}
-                  source={article.source.name}
-                  url={article.url}
-                  imageUrl={article.urlToImage}
-                  title={article.title}
-                  lastUpdated={timeElapsedSince(article.publishedAt)}
-                />
-              )
-            )
-          )}
-        </div>
-        {/* right */}
-        <div className=''>
-          <CategoryHeader
-            title={'Business'}
-            onClick={() => categoryDetailPage('business', businessState)}
-          />
-          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
-
-          {loading ? (
-            <Loader />
-          ) : (
-            filterAndSliceArticles(businessState, 3).map(
-              (article: any, index: number) => (
-                <Card
-                  key={index}
-                  source={article.source.name}
-                  url={article.url}
-                  imageUrl={article.urlToImage}
-                  title={article.title}
-                  lastUpdated={timeElapsedSince(article.publishedAt)}
-                />
-              )
-            )
-          )}
-        </div>
-      </div>
       </div>
     </>
   );
