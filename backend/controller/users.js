@@ -1,4 +1,3 @@
-// users.js
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 
@@ -17,10 +16,11 @@ const signin = (req, res) => {
             });
           } else {
             res.status(200).send({
-              email : result.email,
+              email: user.email,
+              topics: user.topics, // Send user's selected topics
               code: 200,
               message: "User signed in",
-              token: "saurav token",
+              token: "saurav token", // Usually, a token would be generated here
             });
           }
         });
@@ -32,3 +32,4 @@ const signin = (req, res) => {
 };
 
 export { signin };
+

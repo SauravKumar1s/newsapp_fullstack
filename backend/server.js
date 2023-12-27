@@ -6,6 +6,8 @@ import { signin } from "./controller/users.js";
 import { signup } from "./controller/signup.js";
 import { sendotp } from "./controller/sendotp.js";
 import { sumbitotp } from "./controller/sumbitotp.js";
+import { User } from "./models/user.js";
+
 
 const app = express();
 app.use(cors());
@@ -35,6 +37,19 @@ app.post("/signup", signup);
 app.post("/login", signin);
 app.post("/send-otp", sendotp);
 app.post("/sumbit-otp", sumbitotp);
+
+
+// New endpoint for fetching user-selected topics based on user ID
+app.get('/user/topics/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const userTopics = await User.findById(userId);
+    res.status(200).json({ topics: userTopics.topics });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching user topics', error: error.message });
+  }
+});
 
 
 app.listen(port, () => {

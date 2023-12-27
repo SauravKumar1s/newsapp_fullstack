@@ -147,9 +147,9 @@ const HomeComponent: React.FC = () => {
       
 
      
-      <div className='flex-container'>
+      <div className='grid grid-cols-3'>
         {/* left */}
-        <div className='flex-item-left'>
+        <div className=''>
           <CategoryHeader
             title={'Technology'}
             onClick={() => categoryDetailPage('technology', technologyState)}
@@ -175,7 +175,7 @@ const HomeComponent: React.FC = () => {
         </div>
         {/* center */}
 
-        <div className='flex-item-center'>
+        <div className=''>
           <CategoryHeader
             title={'Health'}
             onClick={() => categoryDetailPage('health', healthState)}
@@ -200,7 +200,7 @@ const HomeComponent: React.FC = () => {
           )}
         </div>
         {/* right */}
-        <div className='flex-item-right'>
+        <div className=''>
           <CategoryHeader
             title={'Science'}
             onClick={() => categoryDetailPage('science', scienceState)}
@@ -225,9 +225,9 @@ const HomeComponent: React.FC = () => {
           )}
         </div>
       </div>
-      <div className='flex-container'>
+      <div className='grid grid-cols-3 gap-10'>
         {/* left */}
-        <div className='flex-item-left'>
+        <div className=''>
           <CategoryHeader
             title={'Sports'}
             onClick={() => categoryDetailPage('sports', sportsState)}
@@ -255,7 +255,7 @@ const HomeComponent: React.FC = () => {
 
         {/* center */}
 
-        <div className='flex-item-center'>
+        <div className=''>
           <CategoryHeader
             title={'Entertainment'}
             onClick={() =>
@@ -282,7 +282,7 @@ const HomeComponent: React.FC = () => {
           )}
         </div>
         {/* right */}
-        <div className='flex-item-right'>
+        <div className=''>
           <CategoryHeader
             title={'Business'}
             onClick={() => categoryDetailPage('business', businessState)}

@@ -12,12 +12,12 @@ const CategoryHeader = ({title, onClick, style}: CategoryHeaderProps) => {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <div className={isDarkMode ? 'dark-mode' : 'light-mode bg-white'}>
-    <div className='category-header-wrapper'>
+    <div className={isDarkMode ? 'dark-mode text-white' : 'light-mode bg-white'}>
+    <div className=''>
       <a onClick={onClick}>
-        <h3 style={style} className='category-header-title'>
+        <h3 style={style} className='flex justify-center items-center'>
           {title}
-          <span className='category-caret-right'>
+          <span className=''>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
