@@ -29,8 +29,9 @@ const Login = () => {
         .post("http://localhost:5000/login", { email, password })
         .then((res) => {
           if (res.data.code === 200 && res.data.message === "User signed in") {
-            toast.success("Login successful!");
-            navigate("/");
+            // toast.success("Login successful!");
+            navigate('/', { state: { selectedTopics:res.data.topics } })
+            // navigate("/",{state:{selectedTopics:}});
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("email", email);
           } else {
@@ -106,12 +107,13 @@ const Login = () => {
           </div>
 
           {/* Submit Button */}
-          <input
+          <button
             onClick={handleSubmit}
             type="submit"
-            value="Login"
             className="col-span-2 h-[55px] rounded-[100px] bg-[#5282ED] text-white text-[18px] font-semibold mt-[30px] cursor-pointer"
-          />
+          >
+Login
+          </button>
         </form>
         <p className="text-[#5282ED] text-sm sm:text-[21px] text-center my-[10px] font-semibold">
           Lost your password?

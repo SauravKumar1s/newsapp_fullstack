@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from 'react-router-dom';
-
-
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -41,7 +39,7 @@ const Signup = () => {
     }
   };
 
-  // sumbit button 
+  // sumbit button
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
@@ -53,8 +51,9 @@ const Signup = () => {
           topics: selectedTopics,
         })
         .then((res) => {
-          toast.success("Signup successful!");
-          navigate('/', { state: { selectedTopics } }); // Pass selected topics to the home page
+          toast.success("Signup successful!", selectedTopics);
+          console.log("resss ", selectedTopics);
+          navigate("/", { state: { selectedTopics } }); // Pass selected topics to the home page
         })
         .catch((err) => {
           toast.error("Signup failed. Please try again.");
@@ -112,15 +111,12 @@ const Signup = () => {
 
   return (
     <div className="w-full md:w-[410px] h-auto mx-auto my-[126px] px-[20px]">
-       <ToastContainer />
+      <ToastContainer />
       <h1 className="text-[#5282ED] text-[55px] font-normal leading-[68px] text-center">
         Sign Up
       </h1>
       <div className="mt-[40px] w-full">
-        <form
-          className="w-full grid grid-cols-2 gap-x-[30px] sm:text-[21px] text-sm font-light"
-          onSubmit={handleSubmit}
-        >
+        <form className="w-full grid grid-cols-2 gap-x-[30px] sm:text-[21px] text-sm font-light">
           {/* Email Input */}
           <div className="col-span-2 relative">
             <input
@@ -176,12 +172,13 @@ const Signup = () => {
           </div>
 
           {/* Submit Button */}
-          <input
+          <button
             onClick={handleSubmit}
-            type="submit"
             value="Sign up"
             className="col-span-2 h-[55px] rounded-[100px] bg-[#5282ED] text-white text-[18px] font-semibold mt-[30px] cursor-pointer"
-          />
+          >
+            Submit
+          </button>
         </form>
         <p className="text-[#5282ED] text-sm sm:text-[21px] text-center my-[10px] font-semibold">
           Lost your password?
