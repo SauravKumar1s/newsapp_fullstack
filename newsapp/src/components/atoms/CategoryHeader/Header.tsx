@@ -12,7 +12,7 @@ const CategoryHeader = ({title, onClick, style}: CategoryHeaderProps) => {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <div className={isDarkMode ? 'dark-mode text-white' : 'light-mode bg-white'}>
+    <div className={isDarkMode ? 'dark-mode text-white py-3 mt-4 bg-blue-400 mb-3' : 'light-mode  text-white bg-blue-500 py-3 mt-4 mb-3'}>
     <div className=''>
       <a onClick={onClick}>
         <h3 style={style} className='flex justify-center items-center'>

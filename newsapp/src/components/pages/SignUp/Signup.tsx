@@ -53,9 +53,11 @@ const Signup = () => {
         .then((res) => {
           toast.success("Signup successful!", selectedTopics);
           console.log("resss ", selectedTopics);
-          navigate("/", { state: { selectedTopics } }); // Pass selected topics to the home page
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("email", email);
+          navigate("/", { state: { selectedTopics } });
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error("Signup failed. Please try again.");
         });
     } else {

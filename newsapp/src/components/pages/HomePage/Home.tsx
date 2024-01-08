@@ -5,7 +5,6 @@ import { timeElapsedSince } from "../../../utils/timeElapsed/timeElapsed";
 import CategoryHeader from "../../atoms/CategoryHeader/Header";
 import Loader from "../../atoms/Loader/Loader";
 import Card from "../../molecules/Card/Card";
-import CategoryComponent from "../../molecules/Category/Category";
 import HeaderNavigationMenu from "../../organisms/Navigation/HeaderNavigationMenu";
 import { NewsAppContext } from "../../organisms/context/NewsAppContext";
 import "./Home.styles.css";
@@ -30,10 +29,7 @@ const HomeComponent: React.FC = () => {
     setSportsState,
     technologyState,
     setTechnologyState,
-    fetchSearchData,
-    queryState,
-    searchQuery,
-    searchResult,
+
   }: any = useContext(NewsAppContext);
 
   const initialState = {
@@ -116,26 +112,10 @@ const HomeComponent: React.FC = () => {
       topic?.forEach((topic) => {
         fetchArticles(topic.toLowerCase());
       });
-
-
-      
-      // If no selected topics, fetch default articles
-      // fetchArticles('business');
-      // fetchArticles('entertainment');
-      // fetchArticles('health');
-      // fetchArticles('science');
-      // fetchArticles('sports');
-      // fetchArticles('technology');
     }
   }, [selectedTopics]);
 
   const {
-    business,
-    entertainment,
-    health,
-    science,
-    sports,
-    technology,
     loading,
     error,
   } = state;
@@ -151,14 +131,14 @@ const HomeComponent: React.FC = () => {
     <>
       <div className={isDarkMode ? "dark-mode" : "light-mode"}>
         {/* nav */}
-        <HeaderNavigationMenu title={"React News App"} />
+        {/* <HeaderNavigationMenu title={"React News App"} /> */}
         {/* <CategoryComponent /> */}
 
         {/* <div className="grid grid-cols-3"> */}
-        <div className=" flex gap-4 flex-wrap justify-between">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 px-10 justify-between">
           {/* left */}
           {technologyState.length > 0 && (
-            <div style={{ flex: "0 0 30%" }}>
+            <div>
               <CategoryHeader
                 title={"Technology"}
                 onClick={() =>
@@ -188,7 +168,7 @@ const HomeComponent: React.FC = () => {
           {/* center */}
 
           {healthState.length > 0 && (
-            <div className="  overflow-hidden" style={{ flex: "0 0 30%" }}>
+            <div className="overflow-hidden" style={{ flex: "0 0 30%" }}>
               <CategoryHeader
                 title={"Health"}
                 onClick={() => categoryDetailPage("health", healthState)}

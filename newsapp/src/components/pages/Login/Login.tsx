@@ -30,12 +30,11 @@ const Login = () => {
         .then((res) => {
           if (res.data.code === 200 && res.data.message === "User signed in") {
             // toast.success("Login successful!");
-            navigate('/', { state: { selectedTopics:res.data.topics } })
+            navigate("/", { state: { selectedTopics: res.data.topics } });
             // navigate("/",{state:{selectedTopics:}});
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("email", email);
-            localStorage.setItem("topics",res.data.topics );
-
+            localStorage.setItem("topics", res.data.topics);
           } else {
             toast.error("Invalid credentials. Please try again.");
           }
@@ -66,7 +65,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full md:w-[410px] h-auto mx-auto my-[126px] px-[20px]">
+    <div className="w-full md:w-[410px] h-screen mx-auto mt-[60px] px-[20px]">
       <ToastContainer />
       <h1 className="text-[#5282ED] text-[55px] font-normal leading-[68px] text-center">
         Login
@@ -114,14 +113,11 @@ const Login = () => {
             type="submit"
             className="col-span-2 h-[55px] rounded-[100px] bg-[#5282ED] text-white text-[18px] font-semibold mt-[30px] cursor-pointer"
           >
-Login
+            Login
           </button>
         </form>
-        <p className="text-[#5282ED] text-sm sm:text-[21px] text-center my-[10px] font-semibold">
-          Lost your password?
-        </p>
-
-        <p className="text-[#474A52] text-sm sm:text-[21px] text-center">
+   
+        <p className="text-[#474A52] text-sm sm:text-[21px] text-center mt-2">
           Dont have an account?{" "}
           <Link to={"/signup"} className="text-[#5282ED] font-semibold">
             Sign up

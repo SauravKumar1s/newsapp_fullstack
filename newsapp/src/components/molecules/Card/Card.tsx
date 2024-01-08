@@ -28,6 +28,13 @@ const Card: React.FC<CardProps> = ({
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [isInHistory, setIsInHistory] = useState(false);
 
+  const maxDescriptionLength = 90;
+  const truncatedDescription = description
+    ? description.length > maxDescriptionLength
+      ? description.slice(0, maxDescriptionLength) + "..."
+      : description
+    : "";
+
   const handleAddToWishList = () => {
     // Check if the item is already in the wishlist
     if (isInWishlist) {
@@ -61,7 +68,6 @@ const Card: React.FC<CardProps> = ({
   };
 
   const handleAddToHistory = () => {
-
     // Add the item to the history list
     dispatch(
       addToHistory({
@@ -81,38 +87,50 @@ const Card: React.FC<CardProps> = ({
   const { isDarkMode } = useDarkMode();
 
   return (
-    <div className={isDarkMode ? "dark-mode bg-black" : "light-mode bg-white"}>
-      <div className="border rounded-lg shadow-lg p-4">
+    <div className={isDarkMode ? "dark-mode bg-black" : "light-mode "}>
+      <div className="border rounded-lg shadow-lg p-4 mb-4">
         <div>
           <ToastContainer />
         </div>
+        
+        <img
+          src={imageUrl}
+          alt={title}
+          className="mt-4 w-full h-[200px] rounded-lg"
+        />
+        <div>
+
         <div className="">
-          <div className="text-gray-500">{source}</div>
-          <h1 className="text-2xl font-semibold text-blue-600" onClick={handleAddToHistory}>
+          <div className="text-gray-500 mt-4">{source}</div>
+          <h1
+            className="sm:text-2xl font-semibold text-blue-600"
+            onClick={handleAddToHistory}
+          >
             <a href={url} target="_blank" rel="noopener noreferrer">
               {title}
             </a>
           </h1>
-          {description && (
+          {truncatedDescription && (
             <p className="mt-2 text-gray-700" onClick={handleAddToHistory}>
-              {description}
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 ml-2"
-              >
-                read more
-              </a>
+              {truncatedDescription}
+              {length > maxDescriptionLength && (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 ml-2"
+                >
+                  read more
+                </a>
+              )}
             </p>
           )}
+        </div>
           <p className="cursor-pointer" onClick={handleAddToWishList}>
             {isInWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
           </p>
-
           <p className="mt-2 text-sm text-gray-400">{lastUpdated}</p>
         </div>
-        <img src={imageUrl} alt={title} className="mt-4 w-full rounded-lg" />
       </div>
     </div>
   );

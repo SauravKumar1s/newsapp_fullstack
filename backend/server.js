@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 async function connectToDatabase() {
   try {
     await mongoose.connect(
-      "mongodb+srv://saurav:saurav@cluster0.n2mjfgk.mongodb.net/yourDatabaseName?retryWrites=true&w=majority",
+      "mongodb+srv://saurav:saurav@cluster0.gmhykap.mongodb.net/",
       {}
     );
     console.log("Connected to MongoDB successfully!");
