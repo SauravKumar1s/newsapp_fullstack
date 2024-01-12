@@ -150,7 +150,7 @@ const HomeComponent: React.FC = () => {
               {loading ? (
                 <Loader />
               ) : (
-                filterAndSliceArticles(technologyState, 3).map(
+                filterAndSliceArticles(technologyState, 2).map(
                   (article: any, index: number) => (
                     <Card
                       key={index}
@@ -178,7 +178,7 @@ const HomeComponent: React.FC = () => {
               {loading ? (
                 <Loader />
               ) : (
-                filterAndSliceArticles(healthState, 3).map(
+                filterAndSliceArticles(healthState, 2).map(
                   (article: any, index: number) => (
                     <Card
                       key={index}
@@ -205,7 +205,7 @@ const HomeComponent: React.FC = () => {
               {loading ? (
                 <Loader />
               ) : (
-                filterAndSliceArticles(scienceState, 3).map(
+                filterAndSliceArticles(scienceState, 2).map(
                   (article: any, index: number) => (
                     <Card
                       key={index}
@@ -232,7 +232,7 @@ const HomeComponent: React.FC = () => {
               {loading ? (
                 <Loader />
               ) : (
-                filterAndSliceArticles(sportsState, 3).map(
+                filterAndSliceArticles(sportsState, 2).map(
                   (article: any, index: number) => (
                     <Card
                       key={index}
@@ -263,7 +263,7 @@ const HomeComponent: React.FC = () => {
               {loading ? (
                 <Loader />
               ) : (
-                filterAndSliceArticles(entertainmentState, 3).map(
+                filterAndSliceArticles(entertainmentState, 2).map(
                   (article: any, index: number) => (
                     <Card
                       key={index}
@@ -279,7 +279,7 @@ const HomeComponent: React.FC = () => {
             </div>
           )}
           {/* right */}
-          {businessState.length && (
+          {businessState.length > 0 && (
             <div style={{ flex: "0 0 30%" }}>
               <CategoryHeader
                 title={"Business"}

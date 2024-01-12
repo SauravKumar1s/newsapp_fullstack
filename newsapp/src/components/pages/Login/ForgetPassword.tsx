@@ -29,6 +29,9 @@ const ForgetPassword: React.FC = () => {
   };
 
   return (
+    <div className='h-screen'>
+
+    
     <div className="max-w-md mx-auto mt-8 p-6 border rounded-md shadow-md">
       <h2 className="text-2xl mb-4">Forgot Password?</h2>
       
@@ -52,7 +55,7 @@ const ForgetPassword: React.FC = () => {
           </button>
         </>
      
-    </div>
+    </div></div>
   );
 };
 

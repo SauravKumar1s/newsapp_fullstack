@@ -126,7 +126,7 @@ const Card: React.FC<CardProps> = ({
             </p>
           )}
         </div>
-          <p className="cursor-pointer" onClick={handleAddToWishList}>
+          <p className="cursor-pointer py-2 text-2xl" onClick={handleAddToWishList}>
             {isInWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
           </p>
           <p className="mt-2 text-sm text-gray-400">{lastUpdated}</p>

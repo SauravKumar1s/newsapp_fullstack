@@ -1,7 +1,7 @@
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 
-const saltRounds = 10; // Number of salt rounds for bcrypt hashing
+const saltRounds = 10; 
 
 const sumbitotp = (req, res) => {
   console.log("Request Body:", req.body);

@@ -22,7 +22,7 @@ const signup = (req, res) => {
             const newUser = new User({
               email: req.body.email,
               password: hashedPassword,
-              topics: req.body.topics || [], // Store user-selected topics
+              topics: req.body.topics 
             });
 
             // Save the user to the database

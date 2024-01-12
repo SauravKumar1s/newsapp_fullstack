@@ -65,28 +65,6 @@ const Signup = () => {
       toast.error("Please fix the errors in the form.");
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const validationErrors = validateForm();
-  //   if (Object.keys(validationErrors).length === 0) {
-  //     axios
-  //       .post("http://localhost:5000/signup", {
-  //         email: email,
-  //         password: password,
-  //         topics: selectedTopics,
-  //       })
-  //       .then((res) => {
-  //         toast.success("Signup successful!");
-  //         navigate('/', { state: { selectedTopics } }); // Pass selected topics to the home page
-  //       })
-  //       .catch((err) => {
-  //         toast.error("Signup failed. Please try again.");
-  //       });
-  //   } else {
-  //     setErrors(validationErrors);
-  //     toast.error("Please fix the errors in the form.");
-  //   }
-  // };
 
   const validateForm = () => {
     let errors = {};
@@ -112,7 +90,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full md:w-[410px] h-auto mx-auto my-[126px] px-[20px]">
+    <div className="w-full md:w-[410px] sm:h-screen mx-auto my-[126px] px-[20px]">
       <ToastContainer />
       <h1 className="text-[#5282ED] text-[55px] font-normal leading-[68px] text-center">
         Sign Up
@@ -164,7 +142,7 @@ const Signup = () => {
                     onChange={() => handleTopicChange(topic)}
                     className="form-checkbox rounded-md text-[#5282ED] focus:outline-none focus:ring-2 focus:ring-[#5282ED]"
                   />
-                  <span className="ml-2">{topic}</span>
+                  <span className="ml-2 ">{topic}</span>
                 </label>
               ))}
             </div>

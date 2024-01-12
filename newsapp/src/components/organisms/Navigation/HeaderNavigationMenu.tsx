@@ -1,3 +1,4 @@
+// HeaderNavigationMenu.tsx
 import React, { useState } from "react";
 import { SearchComponent } from "../../molecules/Search/Search";
 import { Link } from "react-router-dom";
@@ -5,13 +6,13 @@ import { useDarkMode } from "../context/DarkModeContext";
 import { AiFillHeart } from "react-icons/ai";
 import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import "../../../components/organisms/Navigation/HeaderNavigationMenu.styles.css"
 
 interface HeaderProps {
   title: string;
   isAuthenticated: boolean;
 }
 
-// const auth = localStorage.getItem("email");
 const HeaderNavigationMenu: React.FC<HeaderProps> = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const navigate = useNavigate();
@@ -25,7 +26,11 @@ const HeaderNavigationMenu: React.FC<HeaderProps> = () => {
 
   return (
     <nav
-      className={`p-4 ${isDarkMode ? "dark-mode" : "light-mode bg-blue-500 "}`}
+      className={`p-4 ${
+        isDarkMode
+          ? "dark-mode-gradient"
+          : "light-mode bg-blue-500"
+      }`}
     >
       <div className="container mx-auto flex justify-between items-center ">
         <Link to="/">
@@ -67,7 +72,9 @@ const HeaderNavigationMenu: React.FC<HeaderProps> = () => {
           <div
             className={`${
               showMenu ? "block" : "hidden"
-            } md:hidden absolute top-12 left-0 right-0 bg-blue-500`}
+            } md:hidden absolute top-12 left-0 right-0 ${
+              isDarkMode ? "dark-mode-gradient" : "bg-blue-500"
+            }`}
           >
             {/* Mobile menu */}
             <div className="container mx-auto p-4">
@@ -124,7 +131,10 @@ const HeaderNavigationMenu: React.FC<HeaderProps> = () => {
                 >
                   logout
                 </div>
-                <Link to="/history" className="text-white hover:text-blue-200 ">
+                <Link
+                  to="/history"
+                  className="text-white hover:text-blue-200 "
+                >
                   History
                 </Link>
                 <Link
