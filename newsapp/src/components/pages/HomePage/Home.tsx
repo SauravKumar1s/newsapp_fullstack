@@ -130,11 +130,6 @@ const HomeComponent: React.FC = () => {
   return (
     <>
       <div className={isDarkMode ? "dark-mode" : "light-mode"}>
-        {/* nav */}
-        {/* <HeaderNavigationMenu title={"React News App"} /> */}
-        {/* <CategoryComponent /> */}
-
-        {/* <div className="grid grid-cols-3"> */}
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 px-10 justify-between">
           {/* left */}
           {technologyState.length > 0 && (

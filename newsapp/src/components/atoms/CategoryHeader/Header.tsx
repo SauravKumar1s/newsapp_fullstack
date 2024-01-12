@@ -12,10 +12,10 @@ const CategoryHeader = ({title, onClick, style}: CategoryHeaderProps) => {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <div className={isDarkMode ? 'dark-mode text-white py-3 mt-4 bg-blue-400 mb-3' : 'light-mode  text-white bg-blue-500 py-3 mt-4 mb-3'}>
-    <div className=''>
+    <div className={isDarkMode ? 'dark-mode text-white py-5 mt-10 bg-blue-400 cursor-pointer' : 'light-mode  text-white bg-blue-500 py-3 mt-4 mb-3 cursor-pointer'}>
+
       <a onClick={onClick}>
-        <h3 style={style} className='flex justify-center items-center'>
+        <h3 style={style} className='flex text-xl font-semibold uppercase justify-center items-center'>
           {title}
           <span className=''>
             <svg
@@ -34,7 +34,6 @@ const CategoryHeader = ({title, onClick, style}: CategoryHeaderProps) => {
           </span>
         </h3>
       </a>
-    </div>
     </div>
   );
 };

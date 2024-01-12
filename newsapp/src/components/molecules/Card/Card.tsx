@@ -58,7 +58,7 @@ const Card: React.FC<CardProps> = ({
       })
     );
 
-    // Show a toast when an item is added to the wishlist
+
     toast.success("Added to Your Fav", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 2000,
@@ -87,8 +87,8 @@ const Card: React.FC<CardProps> = ({
   const { isDarkMode } = useDarkMode();
 
   return (
-    <div className={isDarkMode ? "dark-mode bg-black" : "light-mode "}>
-      <div className="border rounded-lg shadow-lg p-4 mb-4">
+
+      <div className="border rounded-lg p-4 mt-10 mb-10">
         <div>
           <ToastContainer />
         </div>
@@ -96,7 +96,7 @@ const Card: React.FC<CardProps> = ({
         <img
           src={imageUrl}
           alt={title}
-          className="mt-4 w-full h-[200px] rounded-lg"
+          className="mt-4 w-full rounded-lg"
         />
         <div>
 
@@ -111,7 +111,7 @@ const Card: React.FC<CardProps> = ({
             </a>
           </h1>
           {truncatedDescription && (
-            <p className="mt-2 text-gray-700" onClick={handleAddToHistory}>
+            <p className="mt-2 text-gray-500" onClick={handleAddToHistory}>
               {truncatedDescription}
               {length > maxDescriptionLength && (
                 <a
@@ -132,7 +132,7 @@ const Card: React.FC<CardProps> = ({
           <p className="mt-2 text-sm text-gray-400">{lastUpdated}</p>
         </div>
       </div>
-    </div>
+
   );
 };
 
