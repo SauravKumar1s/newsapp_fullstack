@@ -16,14 +16,14 @@ const sendotp = async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "sauravsingh22056@gmail.com",
-        pass: "atdh dvfi jyap ftwg", // Use the app-specific password here
+        user: "devsauravcode@gmail.com",
+        pass: "pmqt wqao xwfw lzhn", 
       },
       authMethod: "PLAIN",
     });
 
     let info = await transporter.sendMail({
-      from: "sauravsingh22056@gmail.com",
+      from: "devsauravcode@gmail.com",
       to: req.body.email,
       subject: "Your OTP for Verification",
       text: _otp.toString(),

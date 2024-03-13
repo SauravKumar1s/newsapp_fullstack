@@ -42,7 +42,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 border rounded-md shadow-md">
+    <div className="max-w-md mx-auto mt-8 p-6  h-screen">
       <h2 className="text-2xl mb-4">Enter OTP</h2>
       <p className="mb-4">
         An OTP has been sent to {email}. Please check your email.
