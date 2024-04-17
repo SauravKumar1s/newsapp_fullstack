@@ -42,6 +42,7 @@ app.post("/sumbit-otp", sumbitotp);
 // New endpoint for fetching user-selected topics based on user ID
 app.get('/user/topics/:userId', async (req, res) => {
   const { userId } = req.params;
+  console.log(userId);
 
   try {
     const userTopics = await User.findById(userId);
@@ -52,6 +53,55 @@ app.get('/user/topics/:userId', async (req, res) => {
 });
 
 
+
+app.patch('/user/topics/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { topics } = req.body;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, { topics: topics }, { new: true });
+    res.status(200).json({ message: 'Topics updated successfully', updatedTopics: updatedUser.topics });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating topics', error: error.message });
+  }
+});
+
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
+
+
+/**
+ * Documentation for News Aggregator API Server
+ *
+ * Overview:
+ * This server acts as the backend for a News Aggregator application. It is built using Express.js and connects to a MongoDB database
+ * for user authentication and management. The server provides endpoints for user registration, login, OTP verification, and for fetching
+ * user-selected topics.
+ *
+ * Database Connection:
+ * - Uses Mongoose to connect to MongoDB.
+ * - The connection string should be replaced with your MongoDB connection string.
+ *
+ * Endpoints:
+ * - POST /signup: Registers a new user.
+ * - POST /login: Authenticates a user and returns a session token.
+ * - POST /send-otp: Sends an OTP to the user's email for verification purposes.
+ * - POST /submit-otp: Verifies the submitted OTP against the server-stored value.
+ * - GET /user/topics/:userId: Fetches the topics selected by the user, identified by userId.
+ *
+ * Middleware:
+ * - `body-parser`: Parses incoming request bodies in a middleware before handlers, available under `req.body`.
+ * - `cors`: Enables CORS to allow the frontend application to communicate with the server from different origins.
+ *
+ * Setup and Execution:
+ * - Ensure MongoDB is accessible and the connection string is correctly set in the `connectToDatabase` function.
+ * - Run `npm install` to install dependencies.
+ * - Start the server using `npm start` or `node [entryFile].js`.
+ * - The server will listen on the specified port and log a message indicating successful startup.
+ *
+ * Note:
+ * This server setup is intended for educational purposes and prototype development. For production environments,
+ * consider securing sensitive endpoints, using environment variables for configuration, and implementing additional
+ * security measures such as HTTPS, input validation, and error handling.
+ */

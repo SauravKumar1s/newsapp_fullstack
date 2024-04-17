@@ -60,3 +60,31 @@ export const SearchComponent = () => {
 
   );
 };
+
+/**
+ * Documentation for SearchComponent
+ *
+ * Overview:
+ * The `SearchComponent` is designed to provide a user interface for searching articles within the application.
+ * It utilizes an input field for users to enter their search queries and a button to initiate the search. Upon
+ * submission, the component fetches search results from an API and navigates to a detail page to display those results.
+ *
+ * State:
+ * - `searchResult`: An array that stores the search results fetched from the API.
+ * - `searchQuery`: A string that stores the current value entered in the search input field.
+ *
+ * Functions:
+ * - `handleInputChange`: Updates the `searchQuery` state as the user types in the search field.
+ * - `handleSearch`: Fetches search results from the API using the current `searchQuery` and navigates to the detail
+ *   page with these results. It uses `fetchSearchDataApi` service to perform the API call.
+ *
+ * Styling:
+ * The component uses Tailwind CSS classes for styling. The search input and button are styled to fit the application's
+ * design theme. Adjustments to styling can be made in the `Search.styles.css` file or by modifying the Tailwind CSS classes directly.
+ *
+ * Usage:
+ * To use the `SearchComponent` within the application, import and render it in the appropriate component, typically
+ * in a header or navbar for accessibility. Ensure the `fetchSearchDataApi` function and navigation setup are correctly
+ * implemented and configured to handle search functionality and results navigation.
+ *
+*/

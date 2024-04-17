@@ -37,3 +37,49 @@ export const fetchSearchDataApi = async (query: any) => {
     console.log(error);
   }
 };
+
+
+/**
+ * Documentation for News API Utilities
+ * 
+ * Overview:
+ * This file provides utility functions to interact with the News API, facilitating the fetching of top headlines
+ * by country and searching for news articles based on a specific query. It uses axios for HTTP requests and is
+ * designed to be imported and utilized by other parts of the application requiring news data.
+ *
+ * Functions:
+ * - `getHeadlineByCountry`: Fetches top headlines for a specific country (India, in this case) from the News API.
+ *    Returns a Promise that resolves to the response data or logs an error.
+ * 
+ * - `fetchSearchDataApi`: Performs a search query on the News API and returns articles based on the query's popularity.
+ *    Accepts a search query string as a parameter. Returns a Promise that resolves to the response data or logs an error.
+ *
+ * Usage:
+ * To use these functions, import them into your component or service and call them with the appropriate parameters. 
+ * For example, to fetch top headlines in India:
+ * 
+ * ```javascript
+ * import { getHeadlineByCountry } from './newsApiUtilities';
+ * 
+ * async function fetchHeadlines() {
+ *   const headlines = await getHeadlineByCountry();
+ *   console.log(headlines);
+ * }
+ * ```
+ * 
+ * To perform a search with a query:
+ * 
+ * ```javascript
+ * import { fetchSearchDataApi } from './newsApiUtilities';
+ * 
+ * async function searchNews(query) {
+ *   const results = await fetchSearchDataApi(query);
+ *   console.log(results);
+ * }
+ * ```
+ *
+ * Note:
+ * These utility functions are configured to use a static API key for the News API. In a production environment,
+ * consider implementing more secure methods of storing and using API keys, such as environment variables or secure
+ * vaults, especially if the application is to be deployed publicly.
+ */

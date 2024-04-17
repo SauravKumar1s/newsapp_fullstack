@@ -8,20 +8,25 @@ import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import "../../../components/organisms/Navigation/HeaderNavigationMenu.styles.css";
 
+// Defining the props for the HeaderNavigationMenu component
 interface HeaderProps {
   title: string;
   isAuthenticated: boolean;
 }
 
+// The HeaderNavigationMenu component displays the top navigation bar
+// including the site title, search component, dark mode toggle, and user authentication links.
 const HeaderNavigationMenu: React.FC<HeaderProps> = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
+  // Function to toggle the mobile menu's visibility
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
+  // Retrieving the authenticated user's email from localStorage
   const auth = localStorage.getItem("email");
 
   return (
@@ -193,3 +198,35 @@ const HeaderNavigationMenu: React.FC<HeaderProps> = () => {
 };
 
 export default HeaderNavigationMenu;
+
+
+/**
+ * Documentation for HeaderNavigationMenu Component
+ *
+ * Overview:
+ * The `HeaderNavigationMenu` component serves as the primary navigation bar for the News Aggregator application.
+ * It integrates responsive design principles to accommodate various device sizes, offering different layouts for
+ * mobile and desktop views. The component leverages the `useDarkMode` context to allow users to toggle between dark
+ * and light themes across the application. Additionally, it supports user authentication by dynamically adjusting
+ * the available menu options based on the user's login state.
+ *
+ * Features:
+ * - Responsive navigation bar with different layouts for mobile and desktop.
+ * - Dynamic menu options based on user authentication state.
+ * - Dark mode toggle functionality integrated with the application's context.
+ * - Search functionality accessible for authenticated users.
+ * - Links to Home, Favorite News, and History pages for quick navigation.
+ * - Logout functionality that clears the user's session and redirects to the login page.
+ *
+ * Usage:
+ * Place the `HeaderNavigationMenu` component at the top of your application layout to serve as the global navigation
+ * bar. Ensure that the `useDarkMode` context is properly configured in your application to utilize the dark mode toggle
+ * functionality. The component automatically adjusts its layout and available options based on the device's viewport
+ * width and the user's authentication state.
+ *
+ * Enhancements:
+ * - The mobile menu toggle could include animated transitions for a smoother user experience.
+ * - Consider adding more interactive elements or dropdown menus for a richer navigation experience.
+ * - Integrate with a global state management solution (e.g., Redux) for managing the authentication state more
+ *   efficiently across the application.
+ */

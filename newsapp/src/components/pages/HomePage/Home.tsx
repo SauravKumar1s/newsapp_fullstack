@@ -1,3 +1,6 @@
+// Imports necessary React hooks, Router hooks for navigation, utility functions for data processing, 
+// custom components for UI rendering, context for global state management, and styles.
+
 import { default as React, useContext, useEffect, useReducer } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { filterAndSliceArticles } from "../../../utils/filterAndSliceArticles/filterAndSliceArticles";
@@ -12,10 +15,16 @@ import { useDarkMode } from "../../organisms/context/DarkModeContext";
 
 const HomeComponent: React.FC = () => {
   const { isDarkMode } = useDarkMode();
+
+  // HomeComponent is a React functional component designed to display news articles based on user-selected topics.
+// It demonstrates the use of React hooks for state and context management, effect side effects, and navigation.
+
   const navigate = useNavigate();
   const location = useLocation();
   const { selectedTopics } = location.state || {};
   console.log("selected topi", selectedTopics);
+
+   // useContext hook to access and manipulate global state within the NewsAppContext.
   const {
     businessState,
     setBusinessState,
@@ -307,3 +316,24 @@ const HomeComponent: React.FC = () => {
 };
 
 export default HomeComponent;
+
+
+    // Header Comments: Start with a brief description of the component's purpose, how it fits into the larger application, and any high-level considerations like theme support or key functionalities.
+
+    // Import Statements: Document the purpose of imported hooks, components, and utilities to clarify their roles within the component.
+
+    // Component Structure: Provide a high-level overview of the component's functionality and its use of React patterns such as context, hooks, and conditional rendering.
+
+    // State Management: Explain the choice of state management technique (useState, useReducer, or context) and the structure of the component's state.
+
+    // Effects and Data Fetching: Detail how side effects are managed with useEffect, including data fetching logic, dependencies, and any cleanup actions.
+
+    // Context Usage: Describe how the component interacts with global state using useContext and the specific pieces of state it consumes or updates.
+
+    // Rendering Logic: Comment on the rendering logic, including conditional rendering based on state, mapping over data to produce a list of elements, and any event handling functions.
+
+    // Function Documentation: For each function within the component, briefly describe its purpose, parameters, return values, and any side effects or state updates it performs.
+
+    // Security and Optimization Notes: Highlight any areas where the code could be optimized for performance or where security best practices could be better applied, such as securing API keys or managing resource-intensive operations.
+
+    // This comprehensive approach ensures that each significant line or block of code in your component is accompanied by explanations or justifications, making the component more understandable and maintainable.
