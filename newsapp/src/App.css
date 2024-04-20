@@ -1,0 +1,23 @@
+// styles.scss
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: rgba(444, 211, 211, 0.849);
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background: linear-gradient(to right, #001773, #000000); 
+  color: white;
+}
+
+.dark-mode input {
+  background: linear-gradient(to right, #001833, #000000); 
+  color: white;
+  border: 1px solid white;
+}
+

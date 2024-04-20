@@ -1,0 +1,19 @@
+$dark-mode-gradient-start: #262626;
+$dark-mode-gradient-end: #000000;
+
+.dark-mode {
+  @extend .dark-mode; 
+  background: linear-gradient(to right, $dark-mode-gradient-start, $dark-mode-gradient-end);
+}
+
+.light-mode {
+  @extend .light-mode;
+}
+
+.nav-link {
+  @apply text-white hover:text-blue-200 py-2;
+}
+
+.logout-btn {
+  @apply text-white hover:text-blue-200 cursor-pointer;
+}
